@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int maior_entre_dois(int a, int b) {
+    return (a + b + abs(a - b)) / 2;
+}
+
+int main() {
+    int a, b, c;
+    int maior_ab, maior_abc;
+
+    scanf("%d %d %d", &a, &b, &c);
+
+    maior_ab = maior_entre_dois(a, b);
+
+    maior_abc = maior_entre_dois(maior_ab, c);
+
+    printf("%d eh o maior\n", maior_abc);
+
+    return 0;
+}

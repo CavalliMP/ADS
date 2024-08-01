@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    char nome_vendedor[100]; 
+    double salario_fixo;     
+    double total_vendas;      
+    double comissao;         
+    double total_a_receber;   
+
+    scanf("%[^\n]%*c", nome_vendedor);
+
+    scanf("%lf", &salario_fixo);
+    scanf("%lf", &total_vendas);
+
+    comissao = total_vendas * 0.15;
+
+    total_a_receber = salario_fixo + comissao;
+
+    printf("TOTAL = R$ %.2f\n", total_a_receber);
+
+    return 0;
+}
