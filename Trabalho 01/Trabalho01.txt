@@ -1,0 +1,226 @@
+#include <stdio.h>
+
+// Declaração das funções
+void somar();
+void subtrair();
+void multiplicar();
+void dividir();
+void elevarPotencia();
+void calcularRaizQuadrada();
+void calcularFatorial();
+void calcularGCD();
+void calcularLCM();
+void resolverEquacaoQuadratica();
+double raizQuadradaAproximada(double numero);
+int gcd(int x, int y);
+int lcm(int x, int y);
+
+int main() {
+    int escolha;
+    do {
+        printf("\nSelecione a operação desejada:\n");
+        printf("0. Sair\n");
+        printf("1. Soma\n");
+        printf("2. Subtração\n");
+        printf("3. Multiplicação\n");
+        printf("4. Divisão\n");
+        printf("5. Potenciação\n");
+        printf("6. Raiz Quadrada\n");
+        printf("7. Fatorial\n");
+        printf("8. GCD (MDC)\n");
+        printf("9. LCM (MMC)\n");
+        printf("10. Equação Quadrática\n");
+        printf("Digite sua escolha: ");
+        scanf("%d", &escolha);
+
+        switch (escolha) {
+            case 1:
+                somar();
+                break;
+            case 2:
+                subtrair();
+                break;
+            case 3:
+                multiplicar();
+                break;
+            case 4:
+                dividir();
+                break;
+            case 5:
+                elevarPotencia();
+                break;
+            case 6:
+                calcularRaizQuadrada();
+                break;
+            case 7:
+                calcularFatorial();
+                break;
+            case 8:
+                calcularGCD();
+                break;
+            case 9:
+                calcularLCM();
+                break;
+            case 10:
+                resolverEquacaoQuadratica();
+                break;
+            case 0:
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+                break;
+        }
+    } while (escolha != 0);
+
+    return 0;
+}
+
+void somar() {
+    double a, b;
+    printf("Insira o primeiro número: ");
+    scanf("%lf", &a);
+    printf("Insira o segundo número: ");
+    scanf("%lf", &b);
+    printf("Resultado: %.5lf + %.5lf = %.5lf\n", a, b, a + b);
+}
+
+void subtrair() {
+    double a, b;
+    printf("Insira o primeiro número: ");
+    scanf("%lf", &a);
+    printf("Insira o segundo número: ");
+    scanf("%lf", &b);
+    printf("Resultado: %.5lf - %.5lf = %.5lf\n", a, b, a - b);
+}
+
+void multiplicar() {
+    double a, b;
+    printf("Insira o primeiro número: ");
+    scanf("%lf", &a);
+    printf("Insira o segundo número: ");
+    scanf("%lf", &b);
+    printf("Resultado: %.5lf * %.5lf = %.5lf\n", a, b, a * b);
+}
+
+void dividir() {
+    double a, b;
+    printf("Insira o primeiro número: ");
+    scanf("%lf", &a);
+    printf("Insira o segundo número: ");
+    scanf("%lf", &b);
+    if (b != 0) {
+        printf("Resultado: %.5lf / %.5lf = %.5lf\n", a, b, a / b);
+    } else {
+        printf("Erro: Divisão por zero.\n");
+    }
+}
+
+void elevarPotencia() {
+    double base;
+    int expoente;
+    double resultado = 1;
+    printf("Insira a base: ");
+    scanf("%lf", &base);
+    printf("Insira o expoente: ");
+    scanf("%d", &expoente);
+    for (int i = 0; i < expoente; i++) {
+        resultado *= base;
+    }
+    printf("Resultado: %.5lf elevado a %d = %.5lf\n", base, expoente, resultado);
+}
+
+void calcularRaizQuadrada() {
+    double numero;
+    printf("Insira o número: ");
+    scanf("%lf", &numero);
+    if (numero < 0) {
+        printf("Erro: Não é possível calcular a raiz quadrada de número negativo.\n");
+        return;
+    }
+    double resultado = raizQuadradaAproximada(numero);
+    printf("Resultado: Raiz quadrada de %.5lf = %.5lf\n", numero, resultado);
+}
+
+double raizQuadradaAproximada(double numero) {
+    double precisao = 0.00001;
+    double estimativa = numero;
+    double raiz = 0;
+    while ((estimativa - raiz) > precisao) {
+        raiz = estimativa;
+        estimativa = (raiz + (numero / raiz)) / 2;
+    }
+    return estimativa;
+}
+
+void calcularFatorial() {
+    int n;
+    unsigned long long resultado = 1;
+    printf("Insira um número inteiro: ");
+    scanf("%d", &n);
+    if (n < 0) {
+        printf("Erro: Não é possível calcular o fatorial de número negativo.\n");
+        return;
+    }
+    for (int i = 1; i <= n; i++) {
+        resultado *= i;
+    }
+    printf("Resultado: %d! = %llu\n", n, resultado);
+}
+
+int gcd(int x, int y) {
+    while (y != 0) {
+        int temp = y;
+        y = x % y;
+        x = temp;
+    }
+    return x;
+}
+
+void calcularGCD() {
+    int numeros[5];
+    printf("Insira 5 números inteiros:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &numeros[i]);
+    }
+    int resultado = numeros[0];
+    for (int i = 1; i < 5; i++) {
+        resultado = gcd(resultado, numeros[i]);
+    }
+    printf("Resultado: GCD dos 5 números é %d\n", resultado);
+}
+
+int lcm(int x, int y) {
+    return (x * y) / gcd(x, y);
+}
+
+void calcularLCM() {
+    int numeros[5];
+    printf("Insira 5 números inteiros:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &numeros[i]);
+    }
+    int resultado = numeros[0];
+    for (int i = 1; i < 5; i++) {
+        resultado = lcm(resultado, numeros[i]);
+    }
+    printf("Resultado: LCM dos 5 números é %d\n", resultado);
+}
+
+void resolverEquacaoQuadratica() {
+    double coefA, coefB, coefC;
+    double discriminante, raiz1, raiz2;
+    printf("Insira os coeficientes a, b e c da equação ax^2 + bx + c = 0:\n");
+    scanf("%lf %lf %lf", &coefA, &coefB, &coefC);
+    discriminante = coefB * coefB - 4 * coefA * coefC;
+    if (discriminante > 0) {
+        raiz1 = (-coefB + raizQuadradaAproximada(discriminante)) / (2 * coefA);
+        raiz2 = (-coefB - raizQuadradaAproximada(discriminante)) / (2 * coefA);
+        printf("Resultado: Raízes reais diferentes: x1 = %.5lf, x2 = %.5lf\n", raiz1, raiz2);
+    } else if (discriminante == 0) {
+        raiz1 = -coefB / (2 * coefA);
+        printf("Resultado: Raízes reais iguais: x1 = x2 = %.5lf\n", raiz1);
+    } else {
+        printf("Resultado: A equação não possui raízes reais.\n");
+    }
+}
